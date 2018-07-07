@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Build
 import android.support.v4.app.NotificationCompat
 import android.util.Log
@@ -15,9 +16,9 @@ object Util {
 
     var TAG: String = "Vai Visitar"
 
-    fun notificarNovaImagem(titulo: String, mensagem: String, context: Context, intent: Intent){
+    fun notificarNovaImagem(titulo: String, mensagem: String, context: Context){
 
-        Log.i(TAG,"")
+        Log.i(TAG,"notificarNovaImagem")
 
         //Para rodar no 8 a api minima tem que ser 26 no Gradle
         var manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -29,9 +30,10 @@ object Util {
 
         var intent = Intent(context, MainActivity::class.java)
 
+
         var pendingIntent = PendingIntent.getActivity(context,0,intent, PendingIntent.FLAG_ONE_SHOT)
 
-        var notification = NotificationCompat.Builder(context, "br.com.avancado.android.projeto.vaivisitar")
+        var notification = NotificationCompat.Builder(context, "notificar")
                 .setContentIntent(pendingIntent)
                 .setContentTitle(titulo)
                 .setContentText(mensagem)

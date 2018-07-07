@@ -15,11 +15,12 @@ class NovaImagemCompleta_Receiver : BroadcastReceiver() {
 
         Log.i(Util.TAG, "NovaImagemCompleta_Receiver")
 
+        //Nova imagem baixada
         var imagemBaixada: Bitmap = intent.getParcelableExtra("imagemString")
 
         Log.i("imagem baixada", imagemBaixada.toString())
 
-        Util.notificarNovaImagem(intent.getStringExtra("titulo"), intent.getStringExtra("mensagem"), context, intent)
+        Util.notificarNovaImagem(intent.getStringExtra("titulo"), intent.getStringExtra("mensagem"), context)
 
     }
 
