@@ -18,6 +18,9 @@ class MainActivity : AppCompatActivity() {
 
         //TODO: aqui deve haver a logica de carregar a imagem que foi salva em algum diretorio do aparelho
 
+        //Verificar se existe uma imagem. Se existir deverá ser exibido no imageview, se não existir, deverá ser chamado o startservice
+
+
         if (intent.hasExtra("imagemString")) {
             Log.i(Util.TAG, "chegou a imagem")
 

@@ -7,7 +7,6 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
 import br.com.avancado.android.projeto.vaivisitar.Utils.Util
-import com.squareup.picasso.Picasso
 
 class NovaImagemCompleta_Receiver : BroadcastReceiver() {
 
@@ -19,6 +18,8 @@ class NovaImagemCompleta_Receiver : BroadcastReceiver() {
         var imagemBaixada: Bitmap = intent.getParcelableExtra("imagemString")
 
         Log.i("imagem baixada", imagemBaixada.toString())
+
+
 
         Util.notificarNovaImagem(intent.getStringExtra("titulo"), intent.getStringExtra("mensagem"), context)
 
