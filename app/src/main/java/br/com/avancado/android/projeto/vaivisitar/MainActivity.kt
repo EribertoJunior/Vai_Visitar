@@ -15,16 +15,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         //TODO: aqui deve haver a logica de carregar a imagem que foi salva em algum diretorio do aparelho
 
-        if (intent.hasExtra("imagemString")) {
+        if (!intent.hasExtra("imagemString")) {
             Log.i(Util.TAG, "chegou a imagem")
-
-        }else{
             startService(Intent(this, BaixarImagens_IntentService::class.java)
                     .putExtra("url", "https://media-cdn.tripadvisor.com/media/photo-s/07/aa/1a/ba/lugar-incrivel.jpg"))
         }
-
     }
 }

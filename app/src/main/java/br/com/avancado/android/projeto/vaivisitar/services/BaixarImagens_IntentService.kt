@@ -4,10 +4,8 @@ import android.app.AlarmManager
 import android.app.IntentService
 import android.app.PendingIntent
 import android.content.Intent
-import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
-import android.os.Parcelable
 import android.util.Log
 import br.com.avancado.android.projeto.vaivisitar.Utils.Util
 import com.squareup.picasso.Picasso
@@ -26,9 +24,6 @@ class BaixarImagens_IntentService : IntentService("BaixarImagens_IntentService")
         intencao.putExtra("imagemString", baixarImagem(intent!!.getStringExtra("url")))
         intencao.putExtra("titulo","Nova Imagem")
         intencao.putExtra("mensagem","Veja esse novo lugar incrivel!!")
-
-
-        //sendBroadcast(Intent("NovaImagem"))
 
         val pIntent = PendingIntent.getBroadcast(this, 0, intencao, PendingIntent.FLAG_ONE_SHOT)
 
