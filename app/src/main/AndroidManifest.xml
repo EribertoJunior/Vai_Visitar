@@ -22,11 +22,16 @@
             android:name=".broadcast_receiver.MyReceiver"
             android:enabled="true"
             android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.BOOT_COMPLETED" />
-        </intent-filter>
-
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
         </receiver>
+
+        <service
+            android:name=".services.BaixarImagens_IntentService"
+            android:exported="false">
+
+        </service>
     </application>
 
 </manifest>
