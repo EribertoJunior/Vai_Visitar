@@ -22,10 +22,13 @@ class BaixarImagens_IntentService : IntentService("BaixarImagens_IntentService")
 
         Log.i(Util.TAG, "BaixarImagens_IntentService")
 
-        val intencao = Intent("NovaImagem")
+        var intencao = Intent("NovaImagem")
         intencao.putExtra("imagemString", baixarImagem(intent!!.getStringExtra("url")))
         intencao.putExtra("titulo","Nova Imagem")
         intencao.putExtra("mensagem","Veja esse novo lugar incrivel!!")
+
+
+        //sendBroadcast(Intent("NovaImagem"))
 
         val pIntent = PendingIntent.getBroadcast(this, 0, intencao, PendingIntent.FLAG_ONE_SHOT)
 
