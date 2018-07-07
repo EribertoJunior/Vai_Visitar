@@ -7,6 +7,9 @@ import android.content.Intent
 import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Parcelable
+import android.util.Log
+import br.com.avancado.android.projeto.vaivisitar.Utils.Util
 import com.squareup.picasso.Picasso
 
 private const val BAIXAR_IMAGEM = "baixar_imagem"
@@ -17,36 +20,26 @@ class BaixarImagens_IntentService : IntentService("BaixarImagens_IntentService")
 
     override fun onHandleIntent(intent: Intent?) {
 
-        //val param1 = intent.getStringExtra(EXTRA_PARAM_URL)
-        //baixarImagem(param1)
+        Log.i(Util.TAG, "BaixarImagens_IntentService")
 
-        val pIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
+        val intencao = Intent("NovaImagem")
+        intencao.putExtra("imagemString", baixarImagem(intent!!.getStringExtra("url")))
+        intencao.putExtra("titulo","Nova Imagem")
+        intencao.putExtra("mensagem","Veja esse novo lugar incrivel!!")
+
+        val pIntent = PendingIntent.getBroadcast(this, 0, intencao, PendingIntent.FLAG_ONE_SHOT)
 
         val alarme = getSystemService(ALARM_SERVICE) as AlarmManager
-        //alarme.setRepeating(AlarmManager.RTC_WAKEUP, 1, 86400000, pIntent)
-        alarme.setRepeating(AlarmManager.RTC_WAKEUP, 1, 86400000, pIntent)
+        alarme.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 5000, pIntent) //5 segundos
 
-        /*when (intent?.action) {
-
-            BAIXAR_IMAGEM -> {
-                val param1 = intent.getStringExtra(EXTRA_PARAM_URL)
-                baixarImagem(param1)
-
-                val pIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
-
-                val alarme = getSystemService(ALARM_SERVICE) as AlarmManager
-                //alarme.setRepeating(AlarmManager.RTC_WAKEUP, 1, 86400000, pIntent)
-                alarme.setRepeating(AlarmManager.RTC_WAKEUP, 1, 86400000, pIntent)
-            }
-
-        }*/
     }
 
+    private fun baixarImagem(url: String): Bitmap? {
+        var imagem :Bitmap = Picasso.get().load(Uri.parse(url)).get()
 
+        Log.i(Util.TAG, imagem.toString())
 
-    private fun baixarImagem(url: String) {
-
-        var imagem: Bitmap = Picasso.get().load(Uri.parse(url)).get()
+        return imagem
 
     }
 }

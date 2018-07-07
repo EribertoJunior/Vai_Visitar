@@ -3,6 +3,7 @@
     package="br.com.avancado.android.projeto.vaivisitar">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:icon="@mipmap/ic_launcher"
@@ -32,6 +33,16 @@
             android:exported="false">
 
         </service>
+
+        <receiver
+            android:name=".broadcast_receiver.NovaImagemCompleta_Receiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="NovaImagem" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
