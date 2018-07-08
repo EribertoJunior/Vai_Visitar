@@ -5,8 +5,17 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.os.Environment
 import android.util.Log
+import android.widget.ImageView
+import br.com.avancado.android.projeto.vaivisitar.MainActivity
+import br.com.avancado.android.projeto.vaivisitar.R
 import br.com.avancado.android.projeto.vaivisitar.Utils.Util
+import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
+import java.net.URI
 
 
 class NovaImagemCompleta_Receiver : BroadcastReceiver() {
@@ -22,16 +31,29 @@ class NovaImagemCompleta_Receiver : BroadcastReceiver() {
 
         //Verificar existe o arquivo, se tiver deleta e salva uma nova que chegou.
         //se não tiver, cria um novo com a imagem.
-        //var imagemSalva = MainActivity().saveImageToInternalStorage(imagemBaixada as Int)
+        val filePath = Environment.getExternalStorageDirectory()
+                .absolutePath + File.separator + "imagem.jpg"
+
+        val imgFile = File(filePath + "imagem.jpg")
+
+        if (filePath == null){
+
+            var imagemsSalva = MainActivity().saveImageToInternalStorage(imagemBaixada as Int)
+
+            val myImage = R.id.imageView  as ImageView     //your image view in the recycler view
+            myImage.setImageURI(imagemsSalva)                         //image set to the image view
+
+
+        } else {
+
+            val bitmap : Bitmap = BitmapFactory.decodeFile(filePath)
+            MainActivity().imageView.setImageBitmap(bitmap)
+
+        }
 
         Util.notificarNovaImagem(intent.getStringExtra("titulo"), intent.getStringExtra("mensagem"), context)
 
     }
 
-//    fun mudarImagem(){
-//
-//
-//
-//    }
 
 }

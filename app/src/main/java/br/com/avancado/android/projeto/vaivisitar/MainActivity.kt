@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
@@ -16,7 +17,10 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
 import android.os.Environment.getExternalStorageDirectory
-
+import android.R.attr.path
+import android.util.Log
+import android.widget.ImageView
+import java.util.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,31 +33,47 @@ class MainActivity : AppCompatActivity() {
         //TODO: aqui deve haver a logica de carregar a imagem que foi salva em algum diretorio do aparelho
 
         //Verificar se existe uma imagem. Se existir deverá ser exibido no imageview, se não existir, deverá ser chamado o startservice
-        if (imageView.drawable != null ){
+
+        val filePath = getExternalStorageDirectory()
+                .absolutePath + File.separator
+
+        val imgFile = File(filePath + "imagem.jpg")
+
+        if (imgFile.exists()) {
+
+            val myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath() + "imagem.jpg") //this is the bitmap for the image
+
+            val myImage = findViewById(R.id.imageView) as ImageView         //your image view in the recycler view
+
+            myImage.setImageBitmap(myBitmap)//image set to the image view
+
+        } else {
 
             startService(Intent(this, BaixarImagens_IntentService::class.java)
                     .putExtra("url", "https://media-cdn.tripadvisor.com/media/photo-s/07/aa/1a/ba/lugar-incrivel.jpg"))
 
-        } else {
-
-
-            saveImageToInternalStorage(R.drawable.internet)
-
-            val filePath = getExternalStorageDirectory()
-                    .absolutePath + File.separator + "imagem.jpg"
-
-            val uri : Uri = Uri.fromFile(getFileStreamPath(filePath))
-
-            imageView.setImageURI(uri)
-
-            //ou
-
-            //val caminho : Uri = saveImageToInternalStorage(R.drawable.internet)
-            //imageView.setImageURI(caminho)
-
-
         }
 
+
+//        if (filePath == null){
+//
+//            startService(Intent(this, BaixarImagens_IntentService::class.java)
+//                    .putExtra("url", "https://media-cdn.tripadvisor.com/media/photo-s/07/aa/1a/ba/lugar-incrivel.jpg"))
+//
+//        } else {
+//
+//            //saveImageToInternalStorage(R.drawable.internet)
+//
+//            val bitmap : Bitmap = BitmapFactory.decodeFile(filePath)
+//
+//            imageView.setImageBitmap(bitmap)
+//
+//            //ou
+//
+//            //val caminho : Uri = saveImageToInternalStorage(R.drawable.internet)
+//            //imageView.setImageURI(caminho)
+//
+//        }
 
 //        if (intent.hasExtra("imagemString")) {
 //            Log.i(Util.TAG, "chegou a imagem")
