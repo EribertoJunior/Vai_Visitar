@@ -1,24 +1,15 @@
 package br.com.avancado.android.projeto.vaivisitar.broadcast_receiver
 
-import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Environment
 import android.util.Log
-import android.widget.ImageView
-import br.com.avancado.android.projeto.vaivisitar.MainActivity
-import br.com.avancado.android.projeto.vaivisitar.R
 import br.com.avancado.android.projeto.vaivisitar.Utils.Util
-import kotlinx.android.synthetic.main.activity_main.*
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.net.URI
-
 
 class NovaImagemCompleta_Receiver : BroadcastReceiver() {
 

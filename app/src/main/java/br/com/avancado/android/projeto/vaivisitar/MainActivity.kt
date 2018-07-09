@@ -1,30 +1,17 @@
 package br.com.avancado.android.projeto.vaivisitar
 
-import android.content.Context
-import android.content.ContextWrapper
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
-import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import br.com.avancado.android.projeto.vaivisitar.services.BaixarImagens_IntentService
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.io.OutputStream
-import android.os.Environment.getExternalStorageDirectory
-import android.R.attr.path
 import android.os.Environment
 import android.content.pm.PackageManager
 import android.support.v4.app.ActivityCompat
 import android.util.Log
-import android.widget.ImageView
-import okhttp3.internal.Util
-import java.util.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
