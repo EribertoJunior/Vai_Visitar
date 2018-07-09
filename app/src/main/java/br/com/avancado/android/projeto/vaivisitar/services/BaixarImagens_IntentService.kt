@@ -29,7 +29,7 @@ class BaixarImagens_IntentService : IntentService("BaixarImagens_IntentService")
         val pIntent = PendingIntent.getBroadcast(this, 0, intencao, PendingIntent.FLAG_ONE_SHOT)
 
         val alarme = getSystemService(ALARM_SERVICE) as AlarmManager
-        alarme.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 2000, pIntent) //5 segundos
+        alarme.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 86400000, pIntent) //1 dia
 
     }
 
