@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         } else {
 
             startService(Intent(this, BaixarImagens_IntentService::class.java)
-                    .putExtra("url", "https://st.depositphotos.com/1813545/2432/i/950/depositphotos_24324865-stock-photo-sunset-on-the-beach-with.jpg"))
+                    .putExtra("url", "http://marcuspessoa.com.br/wp-content/uploads/2014/11/Mamanuca-Islands-%E2%80%93-Fiji.jpg"))
 
         }
 

@@ -29,7 +29,7 @@ object Util {
         }
 
         var intent = Intent(context, MainActivity::class.java)
-        intent.flags.and(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.flags.and(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
 
         var pendingIntent = PendingIntent.getActivity(context,0,intent, PendingIntent.FLAG_ONE_SHOT)
