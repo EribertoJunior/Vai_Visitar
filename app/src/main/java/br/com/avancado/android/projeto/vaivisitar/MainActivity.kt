@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity() {
 
         if (permission != PackageManager.PERMISSION_GRANTED) {
 
-            Log.i(TAG, "Permission to record denied")
+            Log.i(TAG, "Permissão para gravar negado")
             makeRequest()
 
         }
@@ -150,9 +150,9 @@ class MainActivity : AppCompatActivity() {
 
                 if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
 
-                    Log.i(TAG, "Permission has been denied by user")
+                    Log.i(TAG, "A permissão foi negada pelo usuário")
                 } else {
-                    Log.i(TAG, "Permission has been granted by user")
+                    Log.i(TAG, "A permissão foi concedida pelo usuário")
                 }
             }
         }
