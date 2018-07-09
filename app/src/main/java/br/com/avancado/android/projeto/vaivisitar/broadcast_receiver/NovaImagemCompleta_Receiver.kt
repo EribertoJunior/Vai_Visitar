@@ -63,6 +63,5 @@ class NovaImagemCompleta_Receiver : BroadcastReceiver() {
         Util.notificarNovaImagem(intent.getStringExtra("titulo"), intent.getStringExtra("mensagem"), context)
 
     }
-    
 
 }

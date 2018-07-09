@@ -18,17 +18,24 @@ import java.io.IOException
 import java.io.OutputStream
 import android.os.Environment.getExternalStorageDirectory
 import android.R.attr.path
+import android.content.pm.PackageManager
+import android.support.v4.app.ActivityCompat
 import android.util.Log
 import android.widget.ImageView
+import okhttp3.internal.Util
 import java.util.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
 
+    private val TAG = "Permission"
+    private val RECORD_REQUEST_CODE = 101
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setupPermissions()
 
         //TODO: aqui deve haver a logica de carregar a imagem que foi salva em algum diretorio do aparelho
 
@@ -117,5 +124,39 @@ class MainActivity : AppCompatActivity() {
 
         return Uri.parse(file.absolutePath)
     }
+
+
+    private fun setupPermissions() {
+        val permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+
+            Log.i(TAG, "Permission to record denied")
+            makeRequest()
+
+        }
+    }
+
+    private fun makeRequest() {
+        ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                RECORD_REQUEST_CODE)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            RECORD_REQUEST_CODE -> {
+
+                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+
+                    Log.i(TAG, "Permission has been denied by user")
+                } else {
+                    Log.i(TAG, "Permission has been granted by user")
+                }
+            }
+        }
+    }
+
 
 }
