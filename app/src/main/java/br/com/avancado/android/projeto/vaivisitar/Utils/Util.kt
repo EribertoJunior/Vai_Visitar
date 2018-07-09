@@ -29,6 +29,7 @@ object Util {
         }
 
         var intent = Intent(context, MainActivity::class.java)
+        intent.flags.and(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
 
         var pendingIntent = PendingIntent.getActivity(context,0,intent, PendingIntent.FLAG_ONE_SHOT)
@@ -44,4 +45,5 @@ object Util {
 
         manager.notify(1,notification)
     }
+
 }

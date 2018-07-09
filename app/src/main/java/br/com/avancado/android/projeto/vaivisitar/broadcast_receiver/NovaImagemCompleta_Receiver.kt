@@ -1,13 +1,24 @@
 package br.com.avancado.android.projeto.vaivisitar.broadcast_receiver
 
+import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Environment
 import android.util.Log
+import android.widget.ImageView
+import br.com.avancado.android.projeto.vaivisitar.MainActivity
+import br.com.avancado.android.projeto.vaivisitar.R
 import br.com.avancado.android.projeto.vaivisitar.Utils.Util
-import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.net.URI
+
 
 class NovaImagemCompleta_Receiver : BroadcastReceiver() {
 
@@ -20,7 +31,42 @@ class NovaImagemCompleta_Receiver : BroadcastReceiver() {
 
         Log.i("imagem baixada", imagemBaixada.toString())
 
+        //Verificar existe o arquivo, se tiver deleta e salva uma nova que chegou.
+        //se não tiver, cria um novo com a imagem.
+
+        val imgFile = File(Environment.getExternalStorageDirectory().absolutePath + File.separator + "imagem.jpg")
+
+        if (imgFile.exists()) {
+            Log.i(Util.TAG, "Existe um arquivo com esse nome")
+            Log.i(Util.TAG, "deleta imagem existente")
+            imgFile.delete() //deleta imagem existente
+            salvarImagem(imagemBaixada) // salva a imagim baixada
+
+        } else {
+            Log.i(Util.TAG, "Não existe um arquivo com esse nome")
+            salvarImagem(imagemBaixada)// salva a imagim baixada
+        }
+
         Util.notificarNovaImagem(intent.getStringExtra("titulo"), intent.getStringExtra("mensagem"), context)
+
+    }
+
+    fun salvarImagem(imagem: Bitmap) {
+        Log.i(Util.TAG, "Salvando nova Imagem")
+        try {
+            val stream = ByteArrayOutputStream()
+            imagem.compress(Bitmap.CompressFormat.PNG, 100, stream)
+
+            val bytes = stream.toByteArray()
+            val nomeArquivo = Environment.getExternalStorageDirectory().absolutePath + File.separator + "imagem.jpg"
+
+            val fos = FileOutputStream(nomeArquivo)
+            fos.write(bytes)
+            fos.close()
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
     }
 
